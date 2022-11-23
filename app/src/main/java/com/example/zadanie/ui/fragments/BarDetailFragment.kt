@@ -48,7 +48,7 @@ class BarDetailFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            Navigation.findNavController(view).navigate(R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 
@@ -87,7 +87,5 @@ class BarDetailFragment : Fragment() {
         }
 
         viewModel.loadBar(navigationArgs.id)
-
-
     }
 }

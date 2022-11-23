@@ -44,7 +44,7 @@ class AddFriendFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            Navigation.findNavController(view).navigate(R.id.action_to_bars)
+            view.findNavController().navigate(R.id.action_to_bars)
             return
         }
 
@@ -53,7 +53,7 @@ class AddFriendFragment : Fragment() {
         }
 
         addFriendViewModel.isAdded.observe(viewLifecycleOwner){
-            if(it == true)
+            if(it)
             {
                 val action = AddFriendFragmentDirections.actionAddFriendFragmentToFriendsFragment()
                 view.findNavController().navigate(action)

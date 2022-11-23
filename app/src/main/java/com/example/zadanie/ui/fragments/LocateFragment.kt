@@ -79,7 +79,7 @@ class LocateFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            Navigation.findNavController(view).navigate(R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 

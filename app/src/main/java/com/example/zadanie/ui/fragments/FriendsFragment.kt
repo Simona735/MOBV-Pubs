@@ -68,8 +68,7 @@ class FriendsFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            Log.d("-----------------", "ako inak by som sa sem dostala? -_-")
-            Navigation.findNavController(view).navigate(R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 
@@ -78,11 +77,9 @@ class FriendsFragment : Fragment() {
             model = viewmodel
         }.also { bnd ->
             bnd.addFriend.setOnClickListener{
-                //go to add friend fragment
                 val action = FriendsFragmentDirections.actionFriendsFragmentToAddFriendFragment()
-                Navigation.findNavController(view).navigate(action)
+                view.findNavController().navigate(action)
             }
-
             bnd.swiperefresh.setOnRefreshListener {
                 viewmodel.refreshData()
             }

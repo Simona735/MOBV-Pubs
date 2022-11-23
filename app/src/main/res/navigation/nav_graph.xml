@@ -15,7 +15,17 @@
     <fragment
         android:id="@+id/bars_fragment"
         android:name="com.example.zadanie.ui.fragments.BarsFragment"
-        android:label="Bars" />
+        android:label="Bars" >
+        <action
+            android:id="@+id/action_bars_fragment_to_detail_fragment"
+            app:destination="@id/detail_fragment" />
+        <action
+            android:id="@+id/action_bars_fragment_to_locate_fragment"
+            app:destination="@id/locate_fragment" />
+        <action
+            android:id="@+id/action_bars_fragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sign_up_fragment"
         android:name="com.example.zadanie.ui.fragments.SignUpFragment"

@@ -41,7 +41,7 @@ class SignUpFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isNotBlank()) {
-            Navigation.findNavController(view).navigate(R.id.action_to_bars)
+            view.findNavController().navigate(R.id.action_to_bars)
             return
         }
 
@@ -66,7 +66,7 @@ class SignUpFragment : Fragment() {
         }
 
         binding.login.setOnClickListener {
-            it.findNavController().navigate(R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
         }
 
         authViewModel.user.observe(viewLifecycleOwner){

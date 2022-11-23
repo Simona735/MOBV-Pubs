@@ -36,7 +36,7 @@ class BarsRecyclerView : RecyclerView {
         barsAdapter = BarsAdapter(object : BarsEvents {
             override fun onBarClick(bar: BarItem) {
                 this@BarsRecyclerView.findNavController().navigate(
-                    BarsFragmentDirections.actionToDetail(bar.id)
+                    BarsFragmentDirections.actionBarsFragmentToDetailFragment(bar.id)
                 )
             }
         })

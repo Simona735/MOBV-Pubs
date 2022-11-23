@@ -68,7 +68,7 @@ class BarsFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            Navigation.findNavController(view).navigate(R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 
@@ -82,7 +82,8 @@ class BarsFragment : Fragment() {
 
             bnd.findBar.setOnClickListener {
                 if (checkPermissions()) {
-                    it.findNavController().navigate(R.id.action_to_locate)
+                    val action = BarsFragmentDirections.actionBarsFragmentToLocateFragment()
+                    view.findNavController().navigate(action)
                 } else {
                     locationPermissionRequest.launch(
                         arrayOf(
@@ -129,11 +130,13 @@ class BarsFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.logout -> {
                         PreferenceData.getInstance().clearData(requireContext())
-                        Navigation.findNavController(view).navigate(R.id.action_to_login)
+                        view.findNavController().navigate(R.id.action_to_login)
                         true
                     }
                     R.id.friends -> {
-                        Navigation.findNavController(view).navigate(R.id.action_to_friends)
+                        val action = BarsFragmentDirections.actionBarsFragmentToFriendsFragment()
+                        view.findNavController().navigate(action)
+//                        Navigation.findNavController(view).navigate(R.id.action_to_friends)
                         true
                     }
                     //Ascending means smallest to largest, 0 to 9, and/or A to Z
