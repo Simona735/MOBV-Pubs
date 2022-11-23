@@ -27,4 +27,6 @@
     <string name="geolokacia">geolokácia</string>
     <string name="i_m_here">I\'m here</string>
     <string name="add_friend">add_friend</string>
+
+    <string name="username">username</string>
 </resources>

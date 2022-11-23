@@ -241,6 +241,26 @@ class DataRepository private constructor(
         return cache.getFriends()
     }
 
+    suspend fun addFriend(username: String,
+                          onError: (error: String) -> Unit,
+                          onStatus:(status: Boolean) -> Unit)
+    {
+        try {
+            val resp = service.addFriend(AddFriendRequest(contact = username))
+            if (resp.isSuccessful) {
+                onStatus(true)
+            } else if(resp.code() == 500){
+                onStatus(false)
+            }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            onError("Failed to load friends, check internet connection")
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            onError("Failed to load friends, error.")
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: DataRepository? = null

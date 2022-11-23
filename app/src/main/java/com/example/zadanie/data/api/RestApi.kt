@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.zadanie.data.api.helper.AuthInterceptor
 import com.example.zadanie.data.api.helper.TokenAuthenticator
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -60,4 +61,8 @@ interface RestApi {
     @GET("contact/friends.php")
     @Headers("mobv-auth: accept")
     suspend fun friendsList() : Response<List<FriendsListResponse>>
+
+    @POST("/contact/message.php")
+    @Headers("mobv-auth: accept")
+    suspend fun addFriend(@Body friend: AddFriendRequest) : Response<ResponseBody>
 }

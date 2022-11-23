@@ -79,6 +79,8 @@ class FriendsFragment : Fragment() {
         }.also { bnd ->
             bnd.addFriend.setOnClickListener{
                 //go to add friend fragment
+                val action = FriendsFragmentDirections.actionFriendsFragmentToAddFriendFragment()
+                Navigation.findNavController(view).navigate(action)
             }
 
             bnd.swiperefresh.setOnRefreshListener {

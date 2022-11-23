@@ -53,5 +53,17 @@
     <fragment
         android:id="@+id/friendsFragment"
         android:name="com.example.zadanie.ui.fragments.FriendsFragment"
-        android:label="My friends" />
+        android:label="My friends" >
+        <action
+            android:id="@+id/action_friendsFragment_to_addFriendFragment"
+            app:destination="@id/addFriendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFriendFragment"
+        android:name="com.example.zadanie.ui.fragments.AddFriendFragment"
+        android:label="AddFriendFragment" >
+        <action
+            android:id="@+id/action_addFriendFragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+    </fragment>
 </navigation>

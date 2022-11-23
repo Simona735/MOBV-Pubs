@@ -32,6 +32,11 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
             return FriendsViewModel(repository) as T
         }
 
+        if (modelClass.isAssignableFrom(AddFriendViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return AddFriendViewModel(repository) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
