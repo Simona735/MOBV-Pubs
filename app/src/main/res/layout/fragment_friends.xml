@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="model"
             type="com.example.zadanie.ui.viewmodels.FriendsViewModel" />
@@ -35,13 +34,6 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <View
-            showTextToast="@{model.message}"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_friend"
             android:layout_width="wrap_content"
@@ -51,5 +43,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_baseline_person_add_alt_1_24" />
+
+        <View
+            showTextToast="@{model.message}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
