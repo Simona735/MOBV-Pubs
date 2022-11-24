@@ -44,7 +44,7 @@ class AddFriendFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            view.findNavController().navigate(R.id.action_to_bars)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 
