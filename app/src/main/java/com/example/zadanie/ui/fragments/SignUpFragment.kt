@@ -73,7 +73,8 @@ class SignUpFragment : Fragment() {
         authViewModel.user.observe(viewLifecycleOwner){
             it?.let {
                 PreferenceData.getInstance().putUserItem(requireContext(),it)
-                Navigation.findNavController(requireView()).navigate(R.id.action_to_bars)
+                val action = SignUpFragmentDirections.actionSignUpFragmentToBarsFragment()
+                Navigation.findNavController(requireView()).navigate(action)
             }
         }
 

@@ -62,7 +62,6 @@ class LoginFragment : Fragment() {
         }
 
         binding.signup.setOnClickListener {
-            view.findNavController().navigate(R.id.action_to_sign_up)
             val action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
             view.findNavController().navigate(action)
         }
@@ -70,7 +69,8 @@ class LoginFragment : Fragment() {
         authViewModel.user.observe(viewLifecycleOwner){
             it?.let {
                 PreferenceData.getInstance().putUserItem(requireContext(),it)
-                Navigation.findNavController(requireView()).navigate(R.id.action_to_bars)
+                val action = LoginFragmentDirections.actionLoginFragmentToBarsFragment()
+                Navigation.findNavController(requireView()).navigate(action)
             }
         }
     }
