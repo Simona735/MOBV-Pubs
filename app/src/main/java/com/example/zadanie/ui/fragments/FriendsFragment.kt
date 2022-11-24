@@ -25,24 +25,6 @@ class FriendsFragment : Fragment() {
     private lateinit var binding: FragmentFriendsBinding
     private lateinit var viewmodel: FriendsViewModel
 
-    private val locationPermissionRequest = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        when {
-            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                Navigation.findNavController(requireView()).navigate(R.id.action_to_locate)
-                // Precise location access granted.
-            }
-            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                viewmodel.show("Only approximate location access granted.")
-                // Only approximate location access granted.
-            }
-            else -> {
-                viewmodel.show("Location access denied.")
-                // No location access granted.
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
