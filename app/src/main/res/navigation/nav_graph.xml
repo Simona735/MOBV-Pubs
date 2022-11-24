@@ -11,7 +11,14 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.example.zadanie.ui.fragments.LoginFragment"
-        android:label="Login"/>
+        android:label="Login">
+        <action
+            android:id="@+id/action_login_fragment_to_sign_up_fragment"
+            app:destination="@id/sign_up_fragment" />
+        <action
+            android:id="@+id/action_login_fragment_to_bars_fragment"
+            app:destination="@id/bars_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/bars_fragment"
         android:name="com.example.zadanie.ui.fragments.BarsFragment"
@@ -25,11 +32,21 @@
         <action
             android:id="@+id/action_bars_fragment_to_friendsFragment"
             app:destination="@id/friendsFragment" />
+        <action
+            android:id="@+id/action_bars_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
     </fragment>
     <fragment
         android:id="@+id/sign_up_fragment"
         android:name="com.example.zadanie.ui.fragments.SignUpFragment"
-        android:label="Sign Up" />
+        android:label="Sign Up" >
+        <action
+            android:id="@+id/action_sign_up_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_sign_up_fragment_to_bars_fragment"
+            app:destination="@id/bars_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/locate_fragment"
         android:name="com.example.zadanie.ui.fragments.LocateFragment"
