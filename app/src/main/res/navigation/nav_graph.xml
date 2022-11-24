@@ -36,7 +36,8 @@
             app:destination="@id/friendsFragment" />
         <action
             android:id="@+id/action_bars_fragment_to_login_fragment"
-            app:destination="@id/login_fragment" />
+            app:destination="@id/login_fragment"
+            app:popUpTo="@+id/login_fragment"/>
     </fragment>
     <fragment
         android:id="@+id/sign_up_fragment"

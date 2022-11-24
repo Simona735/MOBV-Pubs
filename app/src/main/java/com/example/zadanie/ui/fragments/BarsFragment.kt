@@ -32,8 +32,10 @@ class BarsFragment : Fragment() {
     ) { permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                //TODO check backstack
                 val action = BarsFragmentDirections.actionBarsFragmentToLocateFragment()
                 Navigation.findNavController(requireView()).navigate(action)
+                //Navigation.findNavController(requireView()).navigate(R.id.action_to_locate)
                 // Precise location access granted.
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
@@ -131,7 +133,8 @@ class BarsFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.logout -> {
                         PreferenceData.getInstance().clearData(requireContext())
-                        view.findNavController().navigate(R.id.action_to_login)
+                        val action = BarsFragmentDirections.actionBarsFragmentToLoginFragment()
+                        view.findNavController().navigate(action)
                         true
                     }
                     R.id.friends -> {
