@@ -14,7 +14,8 @@
         android:label="Login">
         <action
             android:id="@+id/action_login_fragment_to_sign_up_fragment"
-            app:destination="@id/sign_up_fragment" />
+            app:destination="@id/sign_up_fragment"
+            app:popUpTo="@+id/sign_up_fragment"/>
         <action
             android:id="@+id/action_login_fragment_to_bars_fragment"
             app:destination="@id/bars_fragment" />
@@ -42,7 +43,8 @@
         android:label="Sign Up" >
         <action
             android:id="@+id/action_sign_up_fragment_to_login_fragment"
-            app:destination="@id/login_fragment" />
+            app:destination="@id/login_fragment"
+            app:popUpTo="@+id/login_fragment"/>
         <action
             android:id="@+id/action_sign_up_fragment_to_bars_fragment"
             app:destination="@id/bars_fragment" />

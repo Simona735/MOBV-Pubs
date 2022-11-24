@@ -63,6 +63,8 @@ class LoginFragment : Fragment() {
 
         binding.signup.setOnClickListener {
             view.findNavController().navigate(R.id.action_to_sign_up)
+            val action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+            view.findNavController().navigate(action)
         }
 
         authViewModel.user.observe(viewLifecycleOwner){

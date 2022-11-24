@@ -66,7 +66,8 @@ class SignUpFragment : Fragment() {
         }
 
         binding.login.setOnClickListener {
-            view.findNavController().navigate(R.id.action_to_login)
+            val action = SignUpFragmentDirections.actionSignUpFragmentToLoginFragment()
+            view.findNavController().navigate(action)
         }
 
         authViewModel.user.observe(viewLifecycleOwner){
