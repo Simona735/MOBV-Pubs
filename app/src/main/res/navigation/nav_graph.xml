@@ -70,9 +70,6 @@
         android:id="@+id/action_to_login"
         app:destination="@id/login_fragment" />
     <action
-        android:id="@+id/action_to_sign_up"
-        app:destination="@id/sign_up_fragment" />
-    <action
         android:id="@+id/action_to_bars"
         app:destination="@id/bars_fragment" />
 
