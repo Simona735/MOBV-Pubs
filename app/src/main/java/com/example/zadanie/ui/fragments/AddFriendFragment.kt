@@ -69,13 +69,10 @@ class AddFriendFragment : Fragment() {
 
         if(friendUsername.isBlank())
         {
-            println("prazdne")
             addFriendViewModel.show("Fill username")
             return
         }
-
         addFriendViewModel.addFriend(friendUsername)
-
     }
 
 

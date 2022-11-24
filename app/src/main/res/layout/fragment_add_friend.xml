@@ -17,8 +17,6 @@
         tools:context=".ui.fragments.AddFriendFragment">
 
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -29,33 +27,35 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="@string/prompt_email"
+                android:hint="@string/username"
                 android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/addNewFriend"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.145"
+                app:layout_constraintVertical_bias="0.2"
                 tools:text="username" />
 
             <Button
                 android:id="@+id/addNewFriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="376dp"
+                android:layout_marginTop="144dp"
                 android:text="@string/add_friend"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addFriendName"
+                app:layout_constraintVertical_bias="0.15" />
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/view2"
                 showTextToast="@{model.message}"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

@@ -251,13 +251,14 @@ class DataRepository private constructor(
                 onStatus(true)
             } else if(resp.code() == 500){
                 onStatus(false)
+                onError("Failed to add friend, username does not exist")
             }
         } catch (ex: IOException) {
             ex.printStackTrace()
-            onError("Failed to load friends, check internet connection")
+            onError("Failed to add friend, check internet connection")
         } catch (ex: Exception) {
             ex.printStackTrace()
-            onError("Failed to load friends, error.")
+            onError("Failed to add friend, error.")
         }
     }
 
