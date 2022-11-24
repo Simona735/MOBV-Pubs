@@ -27,13 +27,13 @@ class AddFriendFragment : Fragment() {
         addFriendViewModel = ViewModelProvider(
             this,
             Injection.provideViewModelFactory(requireContext())
-        ).get(AddFriendViewModel::class.java)
+        )[AddFriendViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddFriendBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,8 +53,7 @@ class AddFriendFragment : Fragment() {
         }
 
         addFriendViewModel.isAdded.observe(viewLifecycleOwner){
-            if(it)
-            {
+            if(it){
                 val action = AddFriendFragmentDirections.actionAddFriendFragmentToFriendsFragment()
                 view.findNavController().navigate(action)
             }
