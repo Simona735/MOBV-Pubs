@@ -58,7 +58,7 @@ interface RestApi {
         }
     }
 
-    @GET("contact/friends.php")
+    @GET("contact/list.php")
     @Headers("mobv-auth: accept")
     suspend fun friendsList() : Response<List<FriendsListResponse>>
 
