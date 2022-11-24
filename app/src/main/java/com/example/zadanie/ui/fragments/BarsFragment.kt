@@ -32,7 +32,8 @@ class BarsFragment : Fragment() {
     ) { permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                Navigation.findNavController(requireView()).navigate(R.id.action_to_locate)
+                val action = BarsFragmentDirections.actionBarsFragmentToLocateFragment()
+                Navigation.findNavController(requireView()).navigate(action)
                 // Precise location access granted.
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
