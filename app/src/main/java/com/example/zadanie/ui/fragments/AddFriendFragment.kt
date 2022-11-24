@@ -54,8 +54,7 @@ class AddFriendFragment : Fragment() {
 
         addFriendViewModel.isAdded.observe(viewLifecycleOwner){
             if(it){
-                val action = AddFriendFragmentDirections.actionAddFriendFragmentToFriendsFragment()
-                view.findNavController().navigate(action)
+                view.findNavController().navigateUp()
             }
         }
 
