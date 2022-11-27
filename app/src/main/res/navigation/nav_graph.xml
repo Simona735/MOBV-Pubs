@@ -67,6 +67,10 @@
         android:id="@+id/action_to_login"
         app:destination="@id/login_fragment" />
 
+    <action
+        android:id="@+id/action_to_bars"
+        app:destination="@id/bars_fragment" />
+
     <fragment
         android:id="@+id/friendsFragment"
         android:name="com.example.zadanie.ui.fragments.FriendsFragment"

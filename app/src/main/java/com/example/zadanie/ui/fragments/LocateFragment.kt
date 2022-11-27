@@ -87,13 +87,9 @@ class LocateFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             model = viewmodel
         }.also { bnd ->
-//            bnd.back.setOnClickListener {
-//                it.findNavController().popBackStack()
-//            }
             bnd.swiperefresh.setOnRefreshListener {
                 loadData()
             }
-
             bnd.checkme.setOnClickListener {
                 if (checkBackgroundPermissions()) {
                     viewmodel.checkMe()
@@ -107,7 +103,6 @@ class LocateFragment : Fragment() {
                 override fun onBarClick(nearbyBar: NearbyBar) {
                     viewmodel.myBar.postValue(nearbyBar)
                 }
-
             }
         }
         viewmodel.loading.observe(viewLifecycleOwner) {
