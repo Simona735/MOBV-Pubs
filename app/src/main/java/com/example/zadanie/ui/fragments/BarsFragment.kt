@@ -2,7 +2,9 @@ package com.example.zadanie.ui.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -205,7 +207,11 @@ class BarsFragment : Fragment() {
                     R.id.sort_distance_from_least -> {
 
                         if(checkPermissions()){
-                            sortByDistance(Sort.DISTANCE_ASCENDING)
+                            if (isGPSTurnedOn() == true){
+                                sortByDistance(Sort.DISTANCE_ASCENDING)
+                            }else{
+                                viewmodel.show("Turn on GPS please")
+                            }
                         }else{
                             locationPermissionRequestToSortAsc.launch(
                                 arrayOf(
@@ -213,14 +219,18 @@ class BarsFragment : Fragment() {
                                     Manifest.permission.ACCESS_COARSE_LOCATION
                                 )
                             )
-                            viewmodel.show("Neboli udelene povolenia pre sledovanie polohy")
+                            viewmodel.show("Location tracking permissions not granted")
                         }
                         true
                     }
                     R.id.sort_distance_from_most -> {
 
                         if(checkPermissions()){
-                            sortByDistance(Sort.DISTANCE_DESCENDING)
+                            if (isGPSTurnedOn() == true){
+                                sortByDistance(Sort.DISTANCE_DESCENDING)
+                            }else{
+                                viewmodel.show("Turn on GPS please")
+                            }
                         }else{
                             locationPermissionRequestToSortDESC.launch(
                                 arrayOf(
@@ -228,7 +238,7 @@ class BarsFragment : Fragment() {
                                     Manifest.permission.ACCESS_COARSE_LOCATION
                                 )
                             )
-                            viewmodel.show("Neboli udelene povolenia pre sledovanie polohy")
+                            viewmodel.show("Location tracking permissions not granted")
                         }
                         true
                     }
@@ -252,6 +262,12 @@ class BarsFragment : Fragment() {
                 } ?: viewmodel.loading.postValue(false)
             }
         }
+    }
+
+    fun isGPSTurnedOn(): Boolean? {
+        val locationManager =
+            activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+        return locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 }
 
