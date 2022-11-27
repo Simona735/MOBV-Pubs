@@ -41,7 +41,8 @@ class LoginFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isNotBlank()) {
-            view.findNavController().navigate(R.id.action_to_bars)
+            val action = LoginFragmentDirections.actionLoginFragmentToBarsFragment()
+            view.findNavController().navigate(action)
             return
         }
 

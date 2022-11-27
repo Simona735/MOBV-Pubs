@@ -41,7 +41,8 @@ class SignUpFragment : Fragment() {
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isNotBlank()) {
-            view.findNavController().navigate(R.id.action_to_bars)
+            val action = SignUpFragmentDirections.actionSignUpFragmentToBarsFragment()
+            view.findNavController().navigate(action)
             return
         }
 
