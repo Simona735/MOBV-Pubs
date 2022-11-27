@@ -58,21 +58,15 @@ class AddFriendFragment : Fragment() {
             }
         }
 
-
     }
 
-    private fun addFriend()
-    {
+    private fun addFriend() {
         val friendUsername = binding.addFriendName.text.toString()
 
-        if(friendUsername.isBlank())
-        {
+        if(friendUsername.isBlank()) {
             addFriendViewModel.show("Fill username")
             return
         }
         addFriendViewModel.addFriend(friendUsername)
     }
-
-
-
 }
