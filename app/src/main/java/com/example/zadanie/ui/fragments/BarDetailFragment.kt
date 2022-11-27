@@ -1,5 +1,6 @@
 package com.example.zadanie.ui.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,11 +11,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.zadanie.R
 import com.example.zadanie.databinding.FragmentDetailBarBinding
 import com.example.zadanie.helpers.Injection
 import com.example.zadanie.helpers.PreferenceData
@@ -27,6 +32,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 
 class BarDetailFragment : Fragment(), OnMapReadyCallback {
@@ -59,12 +66,12 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         val mapFragment =
-            this.childFragmentManager.findFragmentById(com.example.zadanie.R.id.map_view) as SupportMapFragment?
+            this.childFragmentManager.findFragmentById(R.id.map_view) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
 
         val x = PreferenceData.getInstance().getUserItem(requireContext())
         if ((x?.uid ?: "").isBlank()) {
-            view.findNavController().navigate(com.example.zadanie.R.id.action_to_login)
+            view.findNavController().navigate(R.id.action_to_login)
             return
         }
 
@@ -100,6 +107,42 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
                                     val lined = item.value.replace("; ", "\n⚬ ")
                                     bnd.hours.text = "⚬ ${lined}"
                                     bnd.openingHours.isVisible = true
+
+                                }
+                                "cuisine" -> {
+                                    val tags = item.value.split(";")
+                                    for (tag in tags){
+                                        bnd.tagsGroup.addChip(requireContext(), tag.replace("_", " "))
+                                    }
+                                    bnd.tagsGroup.isVisible = true
+                                }
+                                "internet_access" -> {
+                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                    if(item.value == "wlan" || item.value == "yes"){
+                                        bnd.wifiOn.isVisible = true
+                                    }
+                                    if(item.value == "no"){
+                                        bnd.wifiOff.isVisible = false
+                                    }
+                                }
+                                "smoking" -> {
+                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                    if(item.value == "yes"){
+                                        bnd.smokingAllowed.isVisible = true
+                                    }
+                                    if(item.value == "no"){
+                                        bnd.smokingNotAllowed.isVisible = false
+                                    }
+
+                                }
+                                "wheelchair" -> {
+                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                    if(item.value == "yes"){
+                                        bnd.accessible.isVisible = true
+                                    }
+                                    if(item.value == "no"){
+                                        bnd.notAccessible.isVisible = false
+                                    }
 
                                 }
                             }
@@ -152,4 +195,13 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
     }
+
+    private fun ChipGroup.addChip(context: Context, label: String){
+        Chip(context).apply {
+            id = View.generateViewId()
+            text = label
+            addView(this)
+        }
+    }
+
 }

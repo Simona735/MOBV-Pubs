@@ -114,18 +114,77 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.chip.Chip
+                <LinearLayout
+                    android:id="@+id/icon_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/wifi_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_wifi_24" />
+
+                    <TextView
+                        android:id="@+id/wifi_off"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_wifi_off_24" />
+
+                    <TextView
+                        android:id="@+id/smoking_allowed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_smoking_rooms_24" />
+
+                    <TextView
+                        android:id="@+id/smoking_not_allowed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_smoke_free_24" />
+
+                    <TextView
+                        android:id="@+id/accessible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_accessible_24" />
+
+                    <TextView
+                        android:id="@+id/not_accessible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        app:drawableStartCompat="@drawable/ic_baseline_not_accessible_24" />
+
+                </LinearLayout>
+
+                <TextView
                     android:id="@+id/phoneNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:visibility="gone"
-                    app:chipIcon="@drawable/ic_baseline_phone_24" />
+                    app:drawableStartCompat="@drawable/ic_baseline_phone_24" />
 
                 <RelativeLayout
                     android:id="@+id/opening_hours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:visibility="gone">
 
                     <TextView
@@ -146,6 +205,16 @@
                         android:text="" />
 
                 </RelativeLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:visibility="gone"
+                    android:id="@+id/tags_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:chipSpacingVertical="0dp"
+                    />
+
 
             </LinearLayout>
         </ScrollView>
