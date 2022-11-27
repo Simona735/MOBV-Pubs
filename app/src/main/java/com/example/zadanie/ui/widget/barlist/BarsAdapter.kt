@@ -43,7 +43,7 @@ class BarsAdapter(val events: BarsEvents? = null) :
         ) : RecyclerView.ViewHolder(itemView){
 
         fun bind(item: BarItem, events: BarsEvents?) {
-            itemView.findViewById<TextView>(R.id.name).text = item.name
+            itemView.findViewById<TextView>(R.id.name).text = item.name.ifEmpty { "No name" }
             itemView.findViewById<TextView>(R.id.count).text = item.users.toString()
             itemView.findViewById<Chip>(R.id.type).text = item.type
                     .replace("node", "place")
