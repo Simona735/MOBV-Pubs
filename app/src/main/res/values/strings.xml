@@ -8,7 +8,7 @@
     <string name="login_sign_up">"Sign up failed"</string>
     <string name="or_log_in">or log in</string>
     <string name="friends">Friends</string>
-    <string name="or_create_account">or create account.</string>
+    <string name="or_create_account"> or create account</string>
     <string name="bars">Bars</string>
     <string name="log_out">Log out</string>
     <string name="repeat_password">Repeat password</string>
@@ -29,4 +29,6 @@
     <string name="add_friend">Add Friend</string>
 
     <string name="username">Username</string>
+    <string name="webpage">Web page</string>
+    <string name="or">or</string>
 </resources>

@@ -6,12 +6,33 @@
         <variable
             name="model"
             type="com.example.zadanie.ui.viewmodels.LocateViewModel" />
+        <import type="android.view.View" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="24dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="1000dp"
+            android:layout_height="1000dp"
+            android:elevation="15dp"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            android:visibility="@{model.loading ? View.VISIBLE : View.INVISIBLE}"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/drink"
+            app:lottie_url="@raw/drink"
+            tools:ignore="ImageContrastCheck"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="24dp" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
@@ -33,6 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.cardview.widget.CardView
@@ -42,7 +64,7 @@
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="-1dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -54,7 +76,6 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="16dp"
                     android:text="@{model.myBar.name}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,21 +87,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{model.myBar.type}"
+                    android:visibility="@{model.myBar!=null ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/name" />
 
-
-                <com.google.android.material.button.MaterialButton
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/checkme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="10dp"
                     android:enabled="@{model.myBar!=null}"
-                    android:text="@string/i_m_here"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/name" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.083"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/location_pin"
+                    app:lottie_url="@raw/location_pin" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
 
         <View
