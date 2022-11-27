@@ -89,7 +89,12 @@ class LocateFragment : Fragment() {
             model = viewmodel
         }.also { bnd ->
             bnd.swiperefresh.setOnRefreshListener {
-                loadData()
+                if(isGPSTurnedOn()){
+                    loadData()
+                }else{
+                    viewmodel.show("Turn on GPS please")
+                    bnd.swiperefresh.isRefreshing = false
+                }
             }
             bnd.checkme.setOnClickListener {
                 if (checkBackgroundPermissions()) {
