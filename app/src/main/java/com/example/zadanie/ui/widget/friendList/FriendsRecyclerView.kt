@@ -37,9 +37,12 @@ class FriendsRecyclerView : RecyclerView {
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         friendsAdapter = FriendsAdapter(object : FriendsEvents {
             override fun onFriendClick(friend: FriendItem) {
-                this@FriendsRecyclerView.findNavController().navigate(
-                    FriendsFragmentDirections.actionToBars()
-                )
+                if (friend.bar_id != null) {
+                    val barId : String = friend.bar_id
+                    this@FriendsRecyclerView.findNavController().navigate(
+                        FriendsFragmentDirections.actionFriendsFragmentToDetailFragment(barId)
+                    )
+                }
             }
         })
         adapter = friendsAdapter

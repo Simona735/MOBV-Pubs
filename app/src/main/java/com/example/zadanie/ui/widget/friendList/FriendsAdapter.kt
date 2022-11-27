@@ -33,15 +33,15 @@ class FriendsAdapter(val events: FriendsEvents? = null) :
     class FriendItemViewHolder(
         private val parent: ViewGroup,
         itemView: View = LayoutInflater.from(parent.context).inflate(
-            R.layout.bar_item,
+            R.layout.friend_item,
             parent,
             false)
-        ) : RecyclerView.ViewHolder(itemView){
-
+    ) : RecyclerView.ViewHolder(itemView){
         fun bind(item: FriendItem, events: FriendsEvents?) {
             itemView.findViewById<TextView>(R.id.name).text = item.name
+            itemView.findViewById<TextView>(R.id.bar_name).text = item.bar_name
 
-            //itemView.setOnClickListener { events?.onBarClick(item) }
+            itemView.setOnClickListener { events?.onFriendClick(item) }
         }
     }
 }

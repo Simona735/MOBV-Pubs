@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_friendsFragment_to_addFriendFragment"
             app:destination="@id/addFriendFragment" />
+        <action
+            android:id="@+id/action_friendsFragment_to_detail_fragment"
+            app:destination="@id/detail_fragment" />
     </fragment>
     <fragment
         android:id="@+id/addFriendFragment"

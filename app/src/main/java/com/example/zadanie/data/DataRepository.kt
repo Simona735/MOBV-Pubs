@@ -224,6 +224,8 @@ class DataRepository private constructor(
                         FriendItem(
                             it.user_id,
                             it.user_name,
+                            it.bar_id,
+                            it.bar_name
                         )
                     }
                     cache.deleteFriends()
