@@ -63,7 +63,6 @@ class LocateFragment : Fragment() {
         geofencingClient = LocationServices.getGeofencingClient(requireActivity())
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
