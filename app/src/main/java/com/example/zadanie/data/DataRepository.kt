@@ -208,6 +208,10 @@ class DataRepository private constructor(
         return cache.getBars(sort)
     }
 
+    fun dbSortedByDistance(sort: Sort, location: MyLocation): LiveData<List<BarItem>?> {
+        return cache.getBarsSortedByDistance(sort, location)
+    }
+
     suspend fun apiFriendsList(
         onError: (error: String) -> Unit
     ) {

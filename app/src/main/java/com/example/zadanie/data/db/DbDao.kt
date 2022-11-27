@@ -31,14 +31,6 @@ interface DbDao {
     @Query("SELECT * FROM bars order by users ASC, name ASC")
     fun getBarsGuestsDescending(): LiveData<List<BarItem>?>
 
-    //TODO
-    @Query("SELECT * FROM bars order by users DESC, name ASC")
-    fun getBarsDistanceAscending(): LiveData<List<BarItem>?>
-
-    //TODO
-    @Query("SELECT * FROM bars order by users DESC, name ASC")
-    fun getBarsDistanceDescending(): LiveData<List<BarItem>?>
-
     //--------------------------------------------
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -49,4 +41,12 @@ interface DbDao {
 
     @Query("SELECT * FROM friends order by name DESC, name ASC")
     fun getFriends(): LiveData<List<FriendItem>?>
+
+    //--------------------------------------------
+
+    @Query("SELECT * FROM bars ORDER BY ((:latitude-lat)*(:latitude-lat)) + ((:longitude - lon)*(:longitude - lon)) ASC")
+    fun getSortedBarsByDistanceASC(latitude: Double, longitude: Double): LiveData<List<BarItem>?>
+
+    @Query("SELECT * FROM bars ORDER BY ((:latitude-lat)*(:latitude-lat)) + ((:longitude - lon)*(:longitude - lon)) DESC")
+    fun getSortedBarsByDistanceDESC(latitude: Double, longitude: Double): LiveData<List<BarItem>?>
 }

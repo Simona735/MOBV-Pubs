@@ -21,11 +21,16 @@ import com.example.zadanie.helpers.Injection
 import com.example.zadanie.helpers.PreferenceData
 import com.example.zadanie.ui.viewmodels.BarsViewModel
 import com.example.zadanie.ui.viewmodels.Sort
+import com.example.zadanie.ui.viewmodels.data.MyLocation
+import com.google.android.gms.location.CurrentLocationRequest
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 
 class BarsFragment : Fragment() {
     private lateinit var binding: FragmentBarsBinding
     private lateinit var viewmodel: BarsViewModel
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -47,6 +52,44 @@ class BarsFragment : Fragment() {
         }
     }
 
+    private val locationPermissionRequestToSortAsc = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                sortByDistance(Sort.DISTANCE_ASCENDING)
+                // Precise location access granted.
+            }
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                viewmodel.show("Only approximate location access granted.")
+                // Only approximate location access granted.
+            }
+            else -> {
+                viewmodel.show("Location access denied.")
+                // No location access granted.
+            }
+        }
+    }
+
+    private val locationPermissionRequestToSortDESC = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                sortByDistance(Sort.DISTANCE_DESCENDING)
+                // Precise location access granted.
+            }
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                viewmodel.show("Only approximate location access granted.")
+                // Only approximate location access granted.
+            }
+            else -> {
+                viewmodel.show("Location access denied.")
+                // No location access granted.
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,6 +97,7 @@ class BarsFragment : Fragment() {
             this,
             Injection.provideViewModelFactory(requireContext())
         )[BarsViewModel::class.java]
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
 
@@ -162,11 +206,33 @@ class BarsFragment : Fragment() {
                         true
                     }
                     R.id.sort_distance_from_least -> {
-                        viewmodel.sortList(Sort.DISTANCE_ASCENDING)
+
+                        if(checkPermissions()){
+                            sortByDistance(Sort.DISTANCE_ASCENDING)
+                        }else{
+                            locationPermissionRequestToSortAsc.launch(
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                )
+                            )
+                            viewmodel.show("Neboli udelene povolenia pre sledovanie polohy")
+                        }
                         true
                     }
                     R.id.sort_distance_from_most -> {
-                        viewmodel.sortList(Sort.DISTANCE_DESCENDING)
+
+                        if(checkPermissions()){
+                            sortByDistance(Sort.DISTANCE_DESCENDING)
+                        }else{
+                            locationPermissionRequestToSortDESC.launch(
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                )
+                            )
+                            viewmodel.show("Neboli udelene povolenia pre sledovanie polohy")
+                        }
                         true
                     }
                     else -> true
@@ -174,4 +240,21 @@ class BarsFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
+    @SuppressLint("MissingPermission")
+    private fun sortByDistance(sort: Sort) {
+        if (checkPermissions()) {
+            viewmodel.loading.postValue(true)
+            fusedLocationClient.getCurrentLocation(
+                CurrentLocationRequest.Builder().setDurationMillis(30000)
+                    .setMaxUpdateAgeMillis(60000).build(), null
+            ).addOnSuccessListener {
+                it?.let {
+                    viewmodel.myLocation.postValue(MyLocation(it.latitude, it.longitude))
+                    viewmodel.sortList(sort)
+                } ?: viewmodel.loading.postValue(false)
+            }
+        }
+    }
 }
+

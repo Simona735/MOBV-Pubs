@@ -1,9 +1,11 @@
 package com.example.zadanie.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.zadanie.data.DataRepository
 import com.example.zadanie.data.db.model.BarItem
 import com.example.zadanie.helpers.Evento
+import com.example.zadanie.ui.viewmodels.data.MyLocation
 import kotlinx.coroutines.launch
 
 enum class Sort {
@@ -21,6 +23,8 @@ class BarsViewModel(private val repository: DataRepository): ViewModel() {
 
     val loading = MutableLiveData(false)
 
+    val myLocation = MutableLiveData<MyLocation>(null)
+
     private var _sortType: MutableLiveData<Sort> = MutableLiveData( Sort.TITLE_ASCENDING)
 
     val bars: LiveData<List<BarItem>> = Transformations.switchMap(_sortType) { sort ->
@@ -28,7 +32,14 @@ class BarsViewModel(private val repository: DataRepository): ViewModel() {
             loading.postValue(true)
             repository.apiBarList { _message.postValue(Evento(it)) }
             loading.postValue(false)
-            emitSource(repository.dbBars(sort))
+            if(sort == Sort.DISTANCE_ASCENDING || sort == Sort.DISTANCE_DESCENDING)
+            {
+                emitSource(repository.dbSortedByDistance(sort, myLocation.value!!))
+            }
+            else
+            {
+                emitSource(repository.dbBars(sort))
+            }
         }
     }
 

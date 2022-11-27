@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.zadanie.data.db.model.BarItem
 import com.example.zadanie.data.db.model.FriendItem
 import com.example.zadanie.ui.viewmodels.Sort
+import com.example.zadanie.ui.viewmodels.data.MyLocation
 
 class LocalCache(private val dao: DbDao) {
     suspend fun insertBars(bars: List<BarItem>){
@@ -20,14 +21,6 @@ class LocalCache(private val dao: DbDao) {
             Sort.GUESTS_DESCENDING -> {
                 dao.getBarsGuestsDescending()
             }
-            Sort.DISTANCE_ASCENDING -> {
-                //TODO
-                dao.getBars()
-            }
-            Sort.DISTANCE_DESCENDING -> {
-                //TODO
-                dao.getBars()
-            }
             Sort.TITLE_DESCENDING -> {
                 dao.getBarsTitleDescending()
             }
@@ -35,6 +28,20 @@ class LocalCache(private val dao: DbDao) {
                 // default: TITLE_ASCENDING
                 dao.getBarsTitleAscending()
             }
+        }
+    }
+
+    fun getBarsSortedByDistance(sort: Sort, location: MyLocation): LiveData<List<BarItem>?>
+    {
+        return when(sort)
+        {
+            Sort.DISTANCE_ASCENDING -> {
+                dao.getSortedBarsByDistanceASC(location.lat, location.lon)
+            }
+            Sort.DISTANCE_DESCENDING -> {
+                dao.getSortedBarsByDistanceDESC(location.lat, location.lon)
+            }
+            else -> {dao.getBarsTitleAscending()}
         }
     }
 
