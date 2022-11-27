@@ -4,6 +4,13 @@
     app:startDestination="@id/bars_fragment"
     android:id="@+id/nav_graph">
 
+    <action
+        android:id="@+id/action_to_login"
+        app:destination="@id/login_fragment" />
+
+    <action
+        android:id="@+id/action_to_bars"
+        app:destination="@id/bars_fragment" />
 
     <fragment
         android:id="@+id/login_fragment"
@@ -62,14 +69,6 @@
             android:name="id"
             app:argType="string" />
     </fragment>
-
-    <action
-        android:id="@+id/action_to_login"
-        app:destination="@id/login_fragment" />
-
-    <action
-        android:id="@+id/action_to_bars"
-        app:destination="@id/bars_fragment" />
 
     <fragment
         android:id="@+id/friendsFragment"
