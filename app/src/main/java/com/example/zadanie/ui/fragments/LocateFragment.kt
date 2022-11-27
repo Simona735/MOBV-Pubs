@@ -3,9 +3,11 @@ package com.example.zadanie.ui.fragments
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -119,7 +121,11 @@ class LocateFragment : Fragment() {
         }
 
         if (checkPermissions()) {
-            loadData()
+            if(isGPSTurnedOn()){
+                loadData()
+            }else{
+                viewmodel.show("Turn on GPS please")
+            }
         } else {
             Navigation.findNavController(requireView()).navigate(R.id.action_to_bars)
         }
@@ -226,6 +232,12 @@ class LocateFragment : Fragment() {
             requireContext(),
             Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun isGPSTurnedOn(): Boolean {
+        val locationManager =
+            activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+        return locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!
     }
 
 }

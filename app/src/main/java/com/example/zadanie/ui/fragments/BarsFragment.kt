@@ -264,10 +264,10 @@ class BarsFragment : Fragment() {
         }
     }
 
-    fun isGPSTurnedOn(): Boolean? {
+    private fun isGPSTurnedOn(): Boolean {
         val locationManager =
             activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-        return locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        return locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!
     }
 }
 
