@@ -1,6 +1,8 @@
 package com.example.zadanie.data.db
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.zadanie.data.db.model.BarItem
 import com.example.zadanie.data.db.model.FriendItem
 import com.example.zadanie.ui.viewmodels.Sort
@@ -52,4 +54,9 @@ class LocalCache(private val dao: DbDao) {
     suspend fun deleteFriends(){ dao.deleteFriends() }
 
     fun getFriends(): LiveData<List<FriendItem>?> = dao.getFriends()
+
+    fun getBarUsers(id: String): LiveData<List<BarItem>?> {
+        Log.d("----", "got here")
+        return dao.getBarUsers(id)
+    }
 }

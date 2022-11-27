@@ -78,9 +78,6 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             model = viewModel
-            //TODO
-//            counter.text = navigationArgs.users.toString()
-            counter.text = "0"
         }.also { bnd ->
             viewModel.details.observe(viewLifecycleOwner){
                 it?.let {
@@ -154,7 +151,13 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
             }
-
+            viewModel.bars.observe(viewLifecycleOwner){
+                it?.let {
+                    if(it.isNotEmpty()) {
+                        bnd.counter.text = it[0].users.toString()
+                    }
+                }
+            }
             bnd.mapButton.setOnClickListener {
                 startActivity(
                     Intent(
@@ -183,6 +186,7 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+        viewModel.setId(navigationArgs.id)
         viewModel.loadBar(navigationArgs.id)
     }
 

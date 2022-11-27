@@ -29,17 +29,17 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:elevation="15dp"
-            android:indeterminateOnly="false"
-            android:indeterminate="true"
-            android:visibility="@{model.loading ? View.VISIBLE : View.INVISIBLE}"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:elevation="15dp"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            android:visibility="@{model.loading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/drink"
@@ -118,56 +118,56 @@
                     android:id="@+id/icon_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
                         android:id="@+id/wifi_on"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_wifi_24" />
 
                     <TextView
                         android:id="@+id/wifi_off"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_wifi_off_24" />
 
                     <TextView
                         android:id="@+id/smoking_allowed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_smoking_rooms_24" />
 
                     <TextView
                         android:id="@+id/smoking_not_allowed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_smoke_free_24" />
 
                     <TextView
                         android:id="@+id/accessible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_accessible_24" />
 
                     <TextView
                         android:id="@+id/not_accessible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
                         app:drawableStartCompat="@drawable/ic_baseline_not_accessible_24" />
 
                 </LinearLayout>

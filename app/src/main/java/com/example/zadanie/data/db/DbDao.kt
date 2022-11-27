@@ -1,6 +1,7 @@
 package com.example.zadanie.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -30,6 +31,9 @@ interface DbDao {
 
     @Query("SELECT * FROM bars order by users ASC, name ASC")
     fun getBarsGuestsDescending(): LiveData<List<BarItem>?>
+
+    @Query("SELECT * FROM bars WHERE id=:id")
+    fun getBarUsers(id: String): LiveData<List<BarItem>?>
 
     //--------------------------------------------
 

@@ -1,7 +1,9 @@
 package com.example.zadanie.data
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.zadanie.data.api.*
 import com.example.zadanie.data.db.LocalCache
 import com.example.zadanie.data.db.model.BarItem
@@ -210,6 +212,11 @@ class DataRepository private constructor(
 
     fun dbSortedByDistance(sort: Sort, location: MyLocation): LiveData<List<BarItem>?> {
         return cache.getBarsSortedByDistance(sort, location)
+    }
+
+    fun getBarUsers(id : String): LiveData<List<BarItem>?> {
+        Log.d("----------", "got here this time")
+        return cache.getBarUsers(id)
     }
 
     suspend fun apiFriendsList(

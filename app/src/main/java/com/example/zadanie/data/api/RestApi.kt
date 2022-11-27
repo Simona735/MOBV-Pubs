@@ -25,9 +25,6 @@ interface RestApi {
     @POST("user/login.php")
     suspend fun userLogin(@Body user: UserLoginRequest): Response<UserResponse>
 
-//    @POST("user/refresh.php")
-//    suspend fun userRefresh(@Body user: UserRefreshRequest) : Response<UserResponse>
-
     @POST("user/refresh.php")
     fun userRefresh(@Body user: UserRefreshRequest) : Call<UserResponse>
 
@@ -35,10 +32,17 @@ interface RestApi {
     @Headers("mobv-auth: accept")
     suspend fun barList() : Response<List<BarListResponse>>
 
-
     @POST("bar/message.php")
     @Headers("mobv-auth: accept")
     suspend fun barMessage(@Body bar: BarMessageRequest) : Response<Any>
+
+    @GET("contact/list.php")
+    @Headers("mobv-auth: accept")
+    suspend fun friendsList() : Response<List<FriendsListResponse>>
+
+    @POST("/contact/message.php")
+    @Headers("mobv-auth: accept")
+    suspend fun addFriend(@Body friend: AddFriendRequest) : Response<ResponseBody>
 
     companion object{
         const val BASE_URL = "https://zadanie.mpage.sk/"
@@ -57,12 +61,4 @@ interface RestApi {
             return retrofit.create(RestApi::class.java)
         }
     }
-
-    @GET("contact/list.php")
-    @Headers("mobv-auth: accept")
-    suspend fun friendsList() : Response<List<FriendsListResponse>>
-
-    @POST("/contact/message.php")
-    @Headers("mobv-auth: accept")
-    suspend fun addFriend(@Body friend: AddFriendRequest) : Response<ResponseBody>
 }
