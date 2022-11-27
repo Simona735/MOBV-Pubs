@@ -20,8 +20,8 @@ class DetailViewModel(private val repository: DataRepository) : ViewModel() {
     val details: LiveData<List<BarDetailItem>> = bar.switchMap {
         liveData {
             it?.let {
-                emit(it.tags.map {
-                    BarDetailItem(it.key, it.value)
+                emit(it.tags.map { item ->
+                    BarDetailItem(item.key, item.value)
                 })
             } ?: emit(emptyList<BarDetailItem>())
         }

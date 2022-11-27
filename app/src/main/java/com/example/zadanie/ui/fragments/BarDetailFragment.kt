@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -55,16 +56,46 @@ class BarDetailFragment : Fragment() {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             model = viewModel
+            //TODO
+//            counter.text = navigationArgs.users.toString()
+            counter.text = "0"
         }.also { bnd ->
-//            bnd.back.setOnClickListener { it.findNavController().popBackStack() }
             viewModel.details.observe(viewLifecycleOwner){
                 it?.let {
-                    //TODO
-                    Log.d("-------------web", it.toString())
+                    if(it.isNotEmpty()) {
+                        var isWebsitePresent = false
+                        for(item in it){
+                            if(item.key == "website"){
+                                bnd.webButton.isEnabled = true
+                                bnd.webButton.setOnClickListener{
+                                    val queryUrl: Uri = Uri.parse(item.value)
+                                    val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+                                    startActivity(intent)
+                                }
+                                isWebsitePresent = true
+                                break
+                            }
+                        }
+
+                        if(!isWebsitePresent)
+                            bnd.webButton.isEnabled = false
+                    }else{
+                        bnd.webButton.isEnabled = false
+                    }
                 }
             }
-
-
+            viewModel.details.observe(viewLifecycleOwner){
+                it?.let {
+                    bnd.phoneNumber.isVisible = false
+                    for(item in it) {
+                        if(item.key == "phone") {
+                            bnd.phoneNumber.isVisible = true
+                            bnd.phoneNumber.text = item.value
+                            break
+                        }
+                    }
+                }
+            }
             bnd.mapButton.setOnClickListener {
                 startActivity(
                     Intent(
