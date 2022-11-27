@@ -13,7 +13,7 @@
     <string name="log_out">Log out</string>
     <string name="repeat_password">Repeat password</string>
     <string name="back">back</string>
-    <string name="zobrazit_na_mape">Show map</string>
+    <string name="zobrazit_na_mape">Open maps</string>
 
     <string name="z_a">Z -> A</string>
     <string name="a_z">A -> Z</string>
@@ -31,4 +31,5 @@
     <string name="username">Username</string>
     <string name="webpage">Web page</string>
     <string name="or">or</string>
+    <string name="opening_hours">Opening hours:</string>
 </resources>

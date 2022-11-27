@@ -13,7 +13,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
+        >
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map_view"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
@@ -37,29 +49,31 @@
             android:id="@+id/mapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="24dp"
             android:text="@string/zobrazit_na_mape"
             android:visibility="@{model.loading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/map_view" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/webButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="24dp"
             android:text="@string/webpage"
             android:visibility="@{model.loading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/mapButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/map_view" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="24dp"
             android:text="@{model.type}"
             android:visibility="@{model.loading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,13 +82,14 @@
             app:layout_constraintTop_toBottomOf="@+id/mapButton"
             tools:ignore="DuplicateSpeakableTextCheck" />
 
+
         <TextView
             android:id="@+id/counter"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textAlignment="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="24dp"
             android:visibility="@{model.loading ? View.INVISIBLE : View.VISIBLE}"
             app:drawableRightCompat="@drawable/ic_baseline_person_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +97,12 @@
             app:layout_constraintStart_toEndOf="@+id/type"
             app:layout_constraintTop_toBottomOf="@+id/webButton" />
 
-
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:padding="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,9 +116,36 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    app:chipIcon="@drawable/ic_baseline_phone_24" />
+
+                <RelativeLayout
+                    android:id="@+id/opening_hours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center" />
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/opening_hours_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/opening_hours" />
+
+                    <TextView
+                        android:id="@+id/hours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/opening_hours_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="" />
+
+                </RelativeLayout>
 
             </LinearLayout>
         </ScrollView>
@@ -112,6 +155,7 @@
             showTextToast="@{model.message}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_margin="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

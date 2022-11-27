@@ -83,5 +83,10 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:5.2.0"
 
+    //cardview
     implementation "androidx.cardview:cardview:1.0.0"
+
+    //google play maps services
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }
