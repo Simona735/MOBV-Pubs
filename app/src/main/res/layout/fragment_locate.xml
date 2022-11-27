@@ -86,7 +86,7 @@
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{model.myBar.type}"
+                    android:text="@{model.myBar.type.replace('_', ' ')}"
                     android:visibility="@{model.myBar!=null ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/name" />
