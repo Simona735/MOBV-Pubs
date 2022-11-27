@@ -32,7 +32,7 @@ class FriendsFragment : Fragment() {
         viewmodel = ViewModelProvider(
             this,
             Injection.provideViewModelFactory(requireContext())
-        ).get(FriendsViewModel::class.java)
+        )[FriendsViewModel::class.java]
     }
 
 

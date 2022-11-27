@@ -184,7 +184,6 @@ class BarsFragment : Fragment() {
                     R.id.friends -> {
                         val action = BarsFragmentDirections.actionBarsFragmentToFriendsFragment()
                         view.findNavController().navigate(action)
-//                        Navigation.findNavController(view).navigate(R.id.action_to_friends)
                         true
                     }
                     //Ascending means smallest to largest, 0 to 9, and/or A to Z
