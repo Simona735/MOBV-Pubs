@@ -148,8 +148,8 @@ class LocateFragment : Fragment() {
         if (checkPermissions()) {
             viewmodel.loading.postValue(true)
             fusedLocationClient.getCurrentLocation(
-                CurrentLocationRequest.Builder().setDurationMillis(30000)
-                    .setMaxUpdateAgeMillis(60000).build(), null
+                CurrentLocationRequest.Builder().setDurationMillis(5000)
+                    .setMaxUpdateAgeMillis(1000).build(), null
             ).addOnSuccessListener {
                 it?.let {
                     viewmodel.myLocation.postValue(MyLocation(it.latitude, it.longitude))
