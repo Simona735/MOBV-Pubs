@@ -96,8 +96,8 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
                                     isWebsitePresent = true
                                 }
                                 "phone" -> {
-                                    bnd.phoneNumber.isVisible = true
                                     bnd.phoneNumber.text = item.value
+                                    bnd.phoneBlock.isVisible = true
 
                                 }
                                 "opening_hours" -> {

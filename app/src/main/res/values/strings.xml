@@ -32,5 +32,6 @@
     <string name="webpage">Web page</string>
     <string name="or">or</string>
     <string name="opening_hours">Opening hours:</string>
+    <string name="phone_title">Phone:</string>
     <string name="profile">profile</string>
 </resources>
