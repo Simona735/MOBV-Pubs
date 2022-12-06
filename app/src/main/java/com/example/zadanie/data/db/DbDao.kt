@@ -20,10 +20,10 @@ interface DbDao {
     @Query("SELECT * FROM bars order by users DESC, name ASC")
     fun getBars(): LiveData<List<BarItem>?>
 
-    @Query("SELECT * FROM bars order by name ASC, users DESC")
+    @Query("SELECT * FROM bars order by name COLLATE NOCASE ASC, users DESC")
     fun getBarsTitleAscending(): LiveData<List<BarItem>?>
 
-    @Query("SELECT * FROM bars order by name DESC, users DESC")
+    @Query("SELECT * FROM bars order by name COLLATE NOCASE DESC, users DESC")
     fun getBarsTitleDescending(): LiveData<List<BarItem>?>
 
     @Query("SELECT * FROM bars order by users DESC, name ASC")
