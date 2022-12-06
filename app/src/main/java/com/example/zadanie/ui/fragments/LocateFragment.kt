@@ -114,9 +114,9 @@ class LocateFragment : Fragment() {
         viewmodel.loading.observe(viewLifecycleOwner) {
             binding.swiperefresh.isRefreshing = it
         }
-        viewmodel.checkedIn.observe(viewLifecycleOwner) {
-            it?.getContentIfNotHandled()?.let {
-                if (it) {
+        viewmodel.checkedIn.observe(viewLifecycleOwner) { _checkedIn ->
+            _checkedIn?.getContentIfNotHandled()?.let { _checkedInVal ->
+                if (_checkedInVal) {
                     viewmodel.show("Successfully checked in.")
                     viewmodel.myLocation.value?.let {
                         createFence(it.lat, it.lon)
