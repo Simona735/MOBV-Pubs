@@ -43,7 +43,7 @@ interface DbDao {
     @Query("DELETE FROM friends")
     suspend fun deleteFriends()
 
-    @Query("SELECT * FROM friends order by name DESC, name ASC")
+    @Query("SELECT * FROM friends order by name ASC")
     fun getFriends(): LiveData<List<FriendItem>?>
 
     //--------------------------------------------
