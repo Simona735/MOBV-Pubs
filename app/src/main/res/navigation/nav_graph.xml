@@ -84,5 +84,5 @@
     <fragment
         android:id="@+id/addFriendFragment"
         android:name="com.example.zadanie.ui.fragments.AddFriendFragment"
-        android:label="AddFriendFragment" />
+        android:label="Add friend" />
 </navigation>
