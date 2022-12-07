@@ -108,10 +108,11 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
                                 }
                                 "cuisine" -> {
                                     val tags = item.value.split(";")
-                                    for (tag in tags){
-                                        bnd.tagsGroup.addChip(requireContext(), tag.replace("_", " "))
+                                    if (bnd.tagsGroup.childCount == 1){
+                                        for (tag in tags){
+                                            bnd.tagsGroup.addChip(requireContext(), tag.replace("_", " "))
+                                        }
                                     }
-                                    bnd.tagsGroup.isVisible = true
                                 }
                                 "internet_access" -> {
                                     if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
