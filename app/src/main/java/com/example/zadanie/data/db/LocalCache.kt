@@ -1,6 +1,5 @@
 package com.example.zadanie.data.db
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.zadanie.data.db.model.BarItem
@@ -56,7 +55,6 @@ class LocalCache(private val dao: DbDao) {
     fun getFriends(): LiveData<List<FriendItem>?> = dao.getFriends()
 
     fun getBarUsers(id: String): LiveData<List<BarItem>?> {
-        Log.d("----", "got here")
         return dao.getBarUsers(id)
     }
 }

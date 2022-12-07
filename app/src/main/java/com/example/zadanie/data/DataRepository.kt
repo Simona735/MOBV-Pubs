@@ -1,7 +1,6 @@
 package com.example.zadanie.data
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.zadanie.data.api.*
@@ -215,7 +214,6 @@ class DataRepository private constructor(
     }
 
     fun getBarUsers(id : String): LiveData<List<BarItem>?> {
-        Log.d("----------", "got here this time")
         return cache.getBarUsers(id)
     }
 
