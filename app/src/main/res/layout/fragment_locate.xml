@@ -17,8 +17,8 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="1000dp"
-            android:layout_height="1000dp"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
             android:elevation="15dp"
             android:indeterminate="true"
             android:indeterminateOnly="false"

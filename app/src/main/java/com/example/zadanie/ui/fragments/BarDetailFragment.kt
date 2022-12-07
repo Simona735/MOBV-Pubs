@@ -99,8 +99,8 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
 
                             }
                             "opening_hours" -> {
-                                val lined = item.value.replace("; ", "\n⚬ ")
-                                bnd.hours.text = "⚬ ${lined}"
+                                val lined = item.value.replace("; ", "\n• ")
+                                bnd.hours.text = "• ${lined}"
                                 bnd.openingHours.isVisible = true
 
                             }
