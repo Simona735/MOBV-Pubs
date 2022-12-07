@@ -81,74 +81,65 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
         }.also { bnd ->
             viewModel.details.observe(viewLifecycleOwner){
                 it?.let {
-                    if(it.isNotEmpty()) {
-                        logItems(it)
-                        var isWebsitePresent = false
-                        for(item in it){
-                            when (item.key) {
-                                "website" -> {
-                                    bnd.webButton.isEnabled = true
-                                    bnd.webButton.setOnClickListener{
-                                        val queryUrl: Uri = Uri.parse(item.value)
-                                        val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-                                        startActivity(intent)
-                                    }
-                                    isWebsitePresent = true
+                    bnd.webButton.isEnabled = false
+                    for(item in it){
+                        Log.d("--- ${item.key}", "--- ${item.value}")
+                        when (item.key) {
+                            "website" -> {
+                                bnd.webButton.isEnabled = true
+                                bnd.webButton.setOnClickListener{
+                                    val queryUrl: Uri = Uri.parse(item.value)
+                                    val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+                                    startActivity(intent)
                                 }
-                                "phone" -> {
-                                    bnd.phoneNumber.text = item.value
-                                    bnd.phoneBlock.isVisible = true
+                            }
+                            "phone" -> {
+                                bnd.phoneNumber.text = item.value
+                                bnd.phoneBlock.isVisible = true
 
-                                }
-                                "opening_hours" -> {
-                                    val lined = item.value.replace("; ", "\n⚬ ")
-                                    bnd.hours.text = "⚬ ${lined}"
-                                    bnd.openingHours.isVisible = true
+                            }
+                            "opening_hours" -> {
+                                val lined = item.value.replace("; ", "\n⚬ ")
+                                bnd.hours.text = "⚬ ${lined}"
+                                bnd.openingHours.isVisible = true
 
-                                }
-                                "cuisine" -> {
-                                    val tags = item.value.split(";")
-                                    if (bnd.tagsGroup.childCount == 1){
-                                        for (tag in tags){
-                                            bnd.tagsGroup.addChip(requireContext(), tag.replace("_", " "))
-                                        }
+                            }
+                            "cuisine" -> {
+                                val tags = item.value.split(";")
+                                if (bnd.tagsGroup.childCount == 1){
+                                    for (tag in tags){
+                                        bnd.tagsGroup.addChip(requireContext(), tag.replace("_", " "))
                                     }
                                 }
-                                "internet_access" -> {
-                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
-                                    if(item.value == "wlan" || item.value == "yes"){
-                                        bnd.wifiOn.isVisible = true
-                                    }
-                                    if(item.value == "no"){
-                                        bnd.wifiOff.isVisible = false
-                                    }
+                            }
+                            "internet_access" -> {
+                                if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                if(item.value == "wlan" || item.value == "yes"){
+                                    bnd.wifiOn.isVisible = true
                                 }
-                                "smoking" -> {
-                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
-                                    if(item.value == "yes"){
-                                        bnd.smokingAllowed.isVisible = true
-                                    }
-                                    if(item.value == "no"){
-                                        bnd.smokingNotAllowed.isVisible = false
-                                    }
-
+                                if(item.value == "no"){
+                                    bnd.wifiOff.isVisible = false
                                 }
-                                "wheelchair" -> {
-                                    if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
-                                    if(item.value == "yes"){
-                                        bnd.accessible.isVisible = true
-                                    }
-                                    if(item.value == "no"){
-                                        bnd.notAccessible.isVisible = false
-                                    }
-
+                            }
+                            "smoking" -> {
+                                if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                if(item.value == "yes"){
+                                    bnd.smokingAllowed.isVisible = true
+                                }
+                                if(item.value == "no"){
+                                    bnd.smokingNotAllowed.isVisible = false
+                                }
+                            }
+                            "wheelchair" -> {
+                                if (bnd.iconGroup.isGone) bnd.iconGroup.isVisible = true
+                                if(item.value == "yes"){
+                                    bnd.accessible.isVisible = true
+                                }
+                                if(item.value == "no"){
+                                    bnd.notAccessible.isVisible = false
                                 }
                             }
                         }
-                        if(!isWebsitePresent)
-                            bnd.webButton.isEnabled = false
-                    }else{
-                        bnd.webButton.isEnabled = false
                     }
                 }
             }
@@ -189,12 +180,6 @@ class BarDetailFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.setId(navigationArgs.id)
         viewModel.loadBar(navigationArgs.id)
-    }
-
-    private fun logItems(items : List<BarDetailItem>){
-        for(item in items){
-            Log.d("--- ${item.key}", "--- ${item.value}")
-        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
